@@ -1,6 +1,6 @@
 # Projeto HAL9000 🛰️
 
-![HAL9000](https://i.imgur.com/hwYwlYF.jpg)
+![HAL9000](./public/hal-9000.png)
 
 Bem-vindo ao Projeto HAL9000, onde mergulhamos nas profundezas da inteligência artificial generativa e da estética da ficção científica. Inspirado pelo icônico HAL9000 de "2001: Uma Odisseia no Espaço", este projeto busca explorar os limites entre realidade e ficção, criando experiências envolventes e intrigantes.
 
@@ -29,22 +29,9 @@ Para começar a explorar o mundo do HAL9000, siga estas etapas simples:
 
 1. **Clone o Repositório**: `git clone https://github.com/seu-usuario/projeto-hal9000.git`
 2. **Instale as Dependências**: `npm install`
-3. **Execute o Projeto**: `npm start`
+3. **Execute o Projeto**: `npm run dev`
 4. **Explore, Experimente e Divirta-se!**
 
 ## Contribuidores ✨
 
 O Projeto HAL9000 é possível graças ao esforço e dedicação de nossa incrível comunidade de contribuidores. Confira a lista de contribuidores que ajudaram a tornar este projeto uma realidade.
-
-## Contato 📧
-
-Para perguntas, sugestões ou apenas para dizer olá, sinta-se à vontade para entrar em contato conosco:
-
-Email: hal9000@example.com
-
-Siga-nos nas Redes Sociais:
-- Twitter: [@projeto_hal9000](https://twitter.com/projeto_hal9000)
-- Instagram: [@projeto_hal9000](https://www.instagram.com/projeto_hal9000)
-- Facebook: [Projeto HAL9000](https://www.facebook.com/projeto_hal9000)
-
-Estamos ansiosos para ouvir de você e compartilhar esta jornada emocionante no universo do HAL9000! 🚀

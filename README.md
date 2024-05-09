@@ -1,6 +1,6 @@
 # Projeto HAL9000 🛰️
 
-![HAL9000](./public/hal-9000.png)
+<img src="./public/hal-9000.png" alt="HAL9000" width="200"/>
 
 Bem-vindo ao Projeto HAL9000, onde mergulhamos nas profundezas da inteligência artificial generativa e da estética da ficção científica. Inspirado pelo icônico HAL9000 de "2001: Uma Odisseia no Espaço", este projeto busca explorar os limites entre realidade e ficção, criando experiências envolventes e intrigantes.
 

@@ -1,9 +1,13 @@
 import 'react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
-function Chat() {
-    
+interface ChatMessage{
+    author: string;
+    text: string;
+}
+
+function Chat() {    
     const MODEL_NAME = "gemini-1.5-pro-latest";
     const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -48,7 +52,20 @@ function Chat() {
         history: [
         ],
     });
+
+    // Chat History
+    const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
     
+    const messagesEndRef = useRef<HTMLUListElement>(null);
+
+    // UseEffect para rolar para baixo quando a lista de histórico atualizar
+    useEffect(() => {
+        if (messagesEndRef.current) {
+        messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+        }
+    }, [chatHistory]);
+
+
     // User Request
     const request_text = useRef<HTMLInputElement>(null);
 
@@ -58,28 +75,63 @@ function Chat() {
             request_text.current.value == "")
         ) {
             window.alert("Digite algo, Dave.")
+            return;
         }
-        console.log(API_KEY);
         
         const result = await chat.sendMessage(request_text.current!.value);
         const response = result.response;
-        console.log(response.text());
+        
+        setChatHistory([
+            ...chatHistory,
+            {author: "Você", text: request_text.current!.value},
+            {author: "HAL-9000", text: response.text()}
+        ])
     }
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+          event.preventDefault(); // Evita que o formulário seja enviado
+          sendRequest(); // Chama a função do botão
+        }
+    };
 
     return (
         <>
-            <div className='input-group'>
-                <input
-                    ref={request_text}
-                    type="text"
-                    placeholder='Digite algo...'
-                />
-                <button
-                    className='btn-send'
-                    onClick={() => {sendRequest()}}
-                >
-                ➜
-                </button>
+            {chatHistory.length == 0 && (
+                <div className="initial-text">
+                    <h1>HAL-9000</h1>
+                    <p>Para iniciar uma conversa digite algo abaixo</p>
+                </div>
+            )}
+
+            <ul className='chat-history' ref={messagesEndRef}>
+                {chatHistory.map((message, index) => (
+                    <li key={index} className={`message-${message.author}`}>
+                        <strong>{message.author}</strong>
+                        <p>{message.text}</p>
+                    </li>
+                ))}
+            </ul>
+
+            <div className="fixed">
+                <div className='input-group'>
+                    <input
+                        ref={request_text}
+                        type="text"
+                        placeholder='Digite algo...'
+                        onKeyDown={handleKeyDown}
+                    />
+                    <button
+                        className='btn-send'
+                        onClick={() => {sendRequest()}}
+                    >
+                    ➜
+                    </button>
+                </div>
+
+                <footer>
+                    <p>Desenvolvido com @GoogleGemini</p>
+                </footer>
             </div>
         </>
     )

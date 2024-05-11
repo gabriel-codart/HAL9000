@@ -8,14 +8,9 @@ function Home() {
         <img
           src="/hal-9000.png"
           alt="hal-9000"
-          width={"150rem"}
+          width={"100rem"}
         />
       </div>
-
-      <br />
-      
-      <h1>Olá, eu sou o HAL-9000</h1>
-      <p>Em que posso ajudá-lo?</p>
 
       <br />
 

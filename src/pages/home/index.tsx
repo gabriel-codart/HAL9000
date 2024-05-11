@@ -13,7 +13,7 @@ function Home() {
 
       <br />
       
-      <h1>Olá, eu sou o HAL9000</h1>
+      <h1>Olá, eu sou o HAL-9000</h1>
       <p>Em que posso ajudá-lo?</p>
 
       <br />

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 html, body, #root{
-  display: grid;
+  display: block;
 
   height: 100%;
   width: 100%;
@@ -9,12 +9,6 @@ html, body, #root{
   margin: 0;
 
   background: #333;
-
-  & header, main, footer{
-    display: grid;
-    justify-content: center;
-    text-align: center;
-  }
 }
 
 
@@ -27,24 +21,117 @@ html, body, #root{
 }
 
 h1,h2,h3,h4,h5,h6{
-  font-size: 3rem;
+  margin: 0;
+  font-size: 2.5rem;
   color: white;
 }
 
 p{
+  margin: 0;
   font-size: 1.5rem;
   color: silver;
 }
 
 a{
+  margin: 0;
   font-size: 1.5rem;
   text-decoration: underline;
   color: red;
 }
 
+/*-- Main --*/
+main{
+  height: 65%;
+  text-align: center;
+  padding: 5rem 10%;
 
-/*-- Divs --*/
+  & #hal-eye{
+    padding: 1rem;
+    background: #222;
+    border: 1px solid gray;
+
+    & img{
+      animation: haleye 5s infinite linear;
+    }
+  }
+
+  & .input-group{
+    display: flex;
+
+    & input{
+      width: 100%;
+      padding: 0.3rem 0.6rem;
+      background: #444;
+      color: white;
+      border: 3px solid gray;
+      font-size: 1.2rem;
+
+      &:focus{
+        outline-style: none;
+        border: 3px solid black;
+      }
+    }
+
+    & button{
+      background: #444;
+      color: white;
+      border: 3px solid gray;
+      font-size: 1.2rem;
+      cursor: pointer;
+
+      &:hover{
+        background: #333;
+      }
+      &:active{
+        background: #222;
+        border: 3px solid black;
+      }
+    }
+  }
+  
+}
+
+/*-- Haleye --*/
+@keyframes haleye {
+  0%{
+    filter: brightness(1) contrast(1);
+  }
+  50%{
+    filter: brightness(0.8) contrast(1.2);
+  }
+  100%{
+    filter: brightness(1) contrast(1);
+  }
+}
+
+
+/*-- Header e Footer --*/
 header, footer{
-  max-height: 5rem;
+  display: grid;
+  padding: 1rem;
+  max-height: 2rem;
   background: #222;
+  text-align: center;
+}
+
+
+/*-- Scroll --*/
+*{
+  scrollbar-width: auto;
+  scrollbar-color: #333 #555;
+}
+
+*::-webkit-scrollbar {
+  width: calc(10px + 0.390625vw);
+}
+  
+*::-webkit-scrollbar-track {
+  background: #555;
+  border-radius: 0;
+}
+  
+*::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 0;
+  border: 3px solid #555;
 }

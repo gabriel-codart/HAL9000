@@ -1,4 +1,5 @@
 import 'react';
+import Chat from '../../components/chat';
 
 function Home() {
   return (
@@ -18,19 +19,7 @@ function Home() {
 
       <br />
 
-      <div className='input-group'>
-        <input
-          type="text"
-          placeholder='Digite algo...'
-        />
-        <button
-          className='btn-send'
-          onClick={() => {}}
-        >
-          ➜
-        </button>
-      </div>
-      
+      <Chat />
     </>
   )
 }

@@ -55,6 +55,7 @@ function Chat() {
 
     // Chat History
     const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     
     const messagesEndRef = useRef<HTMLUListElement>(null);
 
@@ -77,15 +78,23 @@ function Chat() {
             window.alert("Digite algo, Dave.")
             return;
         }
+
+        setIsLoading(true);
         
-        const result = await chat.sendMessage(request_text.current!.value);
-        const response = result.response;
-        
-        setChatHistory([
-            ...chatHistory,
-            {author: "Você", text: request_text.current!.value},
-            {author: "HAL-9000", text: response.text()}
-        ])
+        try {
+            const result = await chat.sendMessage(request_text.current!.value);
+            const response = result.response;
+            
+            setChatHistory([
+                ...chatHistory,
+                {author: "Você", text: request_text.current!.value},
+                {author: "HAL-9000", text: response.text()}
+            ])
+        } catch (error) {
+            console.error("Erro ao enviar a mensagem:", error);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -97,21 +106,40 @@ function Chat() {
 
     return (
         <>
-            {chatHistory.length == 0 && (
+            {chatHistory.length == 0 && isLoading ? (
+                <div className="initial-text">
+                    <p>Carregando...</p>
+                </div>
+            ):
+            chatHistory.length == 0 && !isLoading ? (
                 <div className="initial-text">
                     <h1>HAL-9000</h1>
                     <p>Para iniciar uma conversa digite algo abaixo</p>
                 </div>
-            )}
-
-            <ul className='chat-history' ref={messagesEndRef}>
-                {chatHistory.map((message, index) => (
-                    <li key={index} className={`message-${message.author}`}>
-                        <strong>{message.author}</strong>
-                        <p>{message.text}</p>
+            ):
+            chatHistory.length > 0 && isLoading ? (
+                <ul className='chat-history' ref={messagesEndRef}>
+                    {chatHistory.map((message, index) => (
+                        <li key={index} className={`message-${message.author}`}>
+                            <strong>{message.author}</strong>
+                            <p>{message.text}</p>
+                        </li>
+                    ))}
+                    <li>
+                        Carregando...
                     </li>
-                ))}
-            </ul>
+                </ul>
+            ):
+            chatHistory.length > 0 && !isLoading ? (
+                <ul className='chat-history' ref={messagesEndRef}>
+                    {chatHistory.map((message, index) => (
+                        <li key={index} className={`message-${message.author}`}>
+                            <strong>{message.author}</strong>
+                            <p>{message.text}</p>
+                        </li>
+                    ))}
+                </ul>
+            ):('')}
 
             <div className="fixed">
                 <div className='input-group'>

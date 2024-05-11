@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Header() {
   return (
     <header>
-        <p>Aqui é o <NavLink to={''}>Header</NavLink></p>
+        <p><NavLink to={'https://github.com/gabriel-codart/HAL9000'}>GitHub</NavLink></p>
     </header>
   )
 }

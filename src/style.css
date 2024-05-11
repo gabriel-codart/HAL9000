@@ -139,6 +139,9 @@ main{
           background: #222;
           border: 3px solid black;
         }
+        &:focus-visible{
+          outline: none;
+        }
       }
     }
   }

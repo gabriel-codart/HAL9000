@@ -9,12 +9,7 @@ interface ChatMessage{
 
 function Chat() {    
     const MODEL_NAME = "gemini-1.5-pro-latest";
-    const API_KEY = import.meta.env.VITE_API_KEY;
-
-    console.log(API_KEY);
-    
-    console.log(process.env.VITE_API_KEY);
-    
+    const API_KEY = import.meta.env.VITE_API_KEY;    
 
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
@@ -88,6 +83,7 @@ function Chat() {
         
         try {
             const result = await chat.sendMessage(request_text.current!.value);
+            request_text.current!.value = "";
             const response = result.response;
             
             setChatHistory([

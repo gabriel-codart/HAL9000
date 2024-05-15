@@ -198,13 +198,13 @@ main{
 /*-- Haleye --*/
 @keyframes haleye {
   0%{
-    filter: brightness(1) contrast(1);
+    filter: brightness(1.25) contrast(1.1);
   }
   50%{
-    filter: brightness(0.8) contrast(1.2);
+    filter: brightness(0.8) contrast(1.5);
   }
   100%{
-    filter: brightness(1) contrast(1);
+    filter: brightness(1.25) contrast(1.1);
   }
 }
 

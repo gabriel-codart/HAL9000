@@ -62,39 +62,43 @@ function Chat() {
     // UseEffect para rolar para baixo quando a lista de histórico atualizar
     useEffect(() => {
         if (messagesEndRef.current) {
-        messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+            messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
         }
-    }, [chatHistory]);
+    }, [isLoading]);
 
 
     // User Request
-    const request_text = useRef<HTMLInputElement>(null);
+    const request_input = useRef<HTMLInputElement>(null);
 
     async function sendRequest() {
-        if (request_text.current &&
-            (request_text.current.value == null ||
-            request_text.current.value == "")
+        if (request_input.current &&
+            (request_input.current.value == null ||
+            request_input.current.value == "")
         ) {
             window.alert("Digite algo, Dave.")
             return;
         }
 
+        const request_text = request_input.current!.value;
+        request_input.current!.value = "";
+
         setIsLoading(true);
         
         try {
-            const result = await chat.sendMessage(request_text.current!.value);
-            request_text.current!.value = "";
+            const result = await chat.sendMessage(request_text);
             const response = result.response;
             
             setChatHistory([
                 ...chatHistory,
-                {author: "Você", text: request_text.current!.value},
+                {author: "Você", text: request_text},
                 {author: "HAL-9000", text: response.text()}
-            ])
+            ]);
         } catch (error) {
             console.error("Erro ao enviar a mensagem:", error);
         } finally {
             setIsLoading(false);
+            console.log(chatHistory);
+            
         }
     }
 
@@ -145,7 +149,7 @@ function Chat() {
             <div className="fixed">
                 <div className='input-group'>
                     <input
-                        ref={request_text}
+                        ref={request_input}
                         type="text"
                         placeholder='Digite algo...'
                         onKeyDown={handleKeyDown}
